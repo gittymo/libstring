@@ -159,3 +159,26 @@ char ** createStringTokensArray(const char * STRING, const char * DELIMETERS_CHA
 
     return tokens_array;
 }
+
+size_t getStringHash(const char * STRING) 
+{
+    _StringHeader * header;
+    if (!isString(STRING, &header)) return 0;
+
+    const int UINT_VALUE_COUNT = header->length / sizeof(unsigned int);
+    const unsigned int MULTIPLIER_CONSTANT = 31;
+
+    size_t hash_value = 0;
+
+    int * UINT_DATA_PTR = (unsigned int *) STRING_TO_HASH;
+    int i = 0;
+    while (i < UINT_VALUE_COUNT) {
+        if (i % 2 == 0) {
+            hash_value = hash_value * (MULTIPLIER_CONSTANT * UINT_DATA_PTR[i++]);
+        } else {
+            hash_value = hash_value ^ (MULTIPLIER_CONSTANT * UINT_DATA_PTR[i++]);
+        }
+    }
+
+    return hash_value;
+}

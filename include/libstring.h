@@ -98,10 +98,14 @@ char ** createStringTokensArray(const char * STRING, const char * DELIMETERS_CHA
 ///                                     in the createStringTokensArray.  Passing an invalid value will result in memory leaks or corruption!
 void freeStringTokensArray(char ** string_tokens_array, size_t string_tokens_array_length);
 
+/// @brief Returns the hash value for the given string.
+/// @param STRING Pointer to the string's char array.
+/// @return Hash value for the given string (or zero on failure) as an unsigned long (size_t) value.
+size_t getStringHash(const char * STRING);
+
 /*  PRIVATE METHODS */
 
 char * _createEmptyString(const size_t LENGTH);
 _StringHeader * _getStringStructure(const char * STRING);
-
 
 #endif
