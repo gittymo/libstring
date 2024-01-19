@@ -4,9 +4,9 @@
 
 #include "libstring.h"
 
-char * createString(const char * SOURCE_STRING)
+char * createString(const char * CHAR_ARRAY)
 {
-    const size_t STRING_LENGTH = SOURCE_STRING ? strlen(SOURCE_STRING) > _MAXIMUM_ALLOWED_STRING_LENGTH ? _MAXIMUM_ALLOWED_STRING_LENGTH : strlen(SOURCE_STRING) : 0;
+    const size_t STRING_LENGTH = CHAR_ARRAY ? strlen(CHAR_ARRAY) > _MAXIMUM_ALLOWED_STRING_LENGTH ? _MAXIMUM_ALLOWED_STRING_LENGTH : strlen(CHAR_ARRAY) : 0;
     const size_t ACTUAL_LENGTH = STRING_LENGTH + 1 + sizeof(_StringHeader);
     char * new_string_data = (char *) calloc(ACTUAL_LENGTH, 1);
     if (!new_string_data) return NULL;
@@ -17,7 +17,7 @@ char * createString(const char * SOURCE_STRING)
     header->structure_ptr = header;
 
     char * string_char_ptr = new_string_data + sizeof(_StringHeader);
-    if (SOURCE_STRING) strcpy(string_char_ptr, SOURCE_STRING);
+    if (CHAR_ARRAY) strcpy(string_char_ptr, CHAR_ARRAY);
 
     return string_char_ptr;
 }
